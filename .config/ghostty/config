@@ -1,0 +1,43 @@
+
+# Shell
+shell-integration = zsh
+
+# 🪟 Window
+
+macos-titlebar-style = hidden
+background-opacity = 0.95
+background-blur-radius = 20
+window-save-state = always
+window-height = 14
+window-width = 180
+window-padding-balance = true
+window-colorspace = display-p3
+mouse-scroll-multiplier = 2
+mouse-hide-while-typing = true
+
+# 📝 Font
+font-style = "Comic Code"
+font-size = 14
+font-thicken = true
+adjust-cell-height = 50%
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = false
+
+# Quick Terminal
+keybind = global:ctrl+opt+grave_accent=toggle_quick_terminal
+quick-terminal-position= bottom
+quick-terminal-animation-duration= 0.06
+quick-terminal-autohide = true 
+
+# keybinding
+
+keybind = ctrl+r=reload_config
+keybind = ctrl+n>up=new_split:up
+keybind = ctrl+n>down=new_split:down
+keybind = ctrl+n>left=new_split:left
+keybind = ctrl+n>right=new_split:right
+
+# 🎨 theme
+
+theme = dark:catppuccin-mocha, light:catppuccin-latte
