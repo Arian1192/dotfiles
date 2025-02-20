@@ -16,7 +16,7 @@ mouse-scroll-multiplier = 2
 mouse-hide-while-typing = true
 
 # 📝 Font
-font-style = "Comic Code"
+font-style = "JetBrainsMono Nerd Font Mono"
 font-size = 14
 font-thicken = true
 adjust-cell-height = 50%
