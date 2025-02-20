@@ -45,11 +45,11 @@ Make sure you have Git and Stow installed on your macOS system. You can install 
     git clone https://github.com/Arian1192/dotfiles.git ~/.dotfiles
     ```
 
-2. **Run the installation script:**
+2. **Run Stow . to create symlinks:**
 
     ```sh
     cd ~/.dotfiles
-    ./install.sh
+    stow .
     ```
 
 3. **Restart your terminal:**
