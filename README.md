@@ -15,7 +15,29 @@ Welcome to my personal dotfiles configuration repository! This repository contai
 
 ## Installation
 
-Follow these steps to install my custom dotfile configurations:
+### Prerequisites
+
+Make sure you have Git and Stow installed on your macOS system. You can install them using Homebrew:
+
+1. **Install Homebrew (if not already installed):**
+
+    ```sh
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+
+2. **Install Git:**
+
+    ```sh
+    brew install git
+    ```
+
+3. **Install Stow:**
+
+    ```sh
+    brew install stow
+    ```
+
+### Clone and Install Dotfiles
 
 1. **Clone the repository:**
 
@@ -60,4 +82,4 @@ If you have any suggestions or improvements, feel free to open an issue or submi
 
 ## License
 
-This project is licensed under 
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
