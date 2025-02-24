@@ -1,6 +1,11 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+
+
+# Id don't remember something about this check de video https://www.youtube.com/watch?v=y6XCebnB9gs of the Dreams of Autonomy channel
+
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -26,9 +31,13 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
+
 # Add in snippets
 zinit snippet OMZP::git
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::docker-compose
+zinit snippet OMZP::nmap
+
 
 # Add in powerlevel10K
 zinit ice depth=1; zinit light romkatv/powerlevel10k
@@ -59,6 +68,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # zstyle ':completion:*' list-colors "${s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
 # Aliases
 alias ls='ls --color'
 alias nvim='nvim'
@@ -67,4 +79,6 @@ alias c='clear'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval $(thefuck --alias)
-eval "$(zoxide init --cmd cd zsh)"
+#eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init zsh)"
+
