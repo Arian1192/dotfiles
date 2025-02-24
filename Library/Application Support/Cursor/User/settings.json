@@ -1,0 +1,53 @@
+{
+  "breadcrumbs.enabled": false,
+  "editor.fontSize": 14,
+  "editor.lineNumbers": "on",
+  "editor.wordWrap": "on",
+  "editor.codeLens": false,
+  "editor.lineHeight": 20,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "editor.insertSpaces": true,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorStyle": "line",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "editor.suggestOnTriggerCharacters": true,
+  "javascript.suggest.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "eslint.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.run": "onType",
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.formatOnType": true,
+  "editor.suggestSelection": "first",
+  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?",
+  "explorer.compactFolders": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "python.defaultInterpreterPath": "/Users/arian/.pyenv/versions/3.10.0/bin/python",
+  "workbench.settings.applyToAllProfiles": []
+}
