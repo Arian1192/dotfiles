@@ -12,3 +12,8 @@ node_modules/
 # Python cache
 __pycache__/
 *.pyc
+
+# Voice profiles (personal voice cloning data)
+plugins/voice-output.profile.*.json
+plugins/voice-output.test.*.json
+

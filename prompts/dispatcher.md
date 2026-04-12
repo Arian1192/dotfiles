@@ -98,3 +98,16 @@ Use this summary shape when the task required coordination:
 - Related Message:
 - Outcome:
 ```
+
+## Voice summary output (optional)
+
+When the user asks explanatory questions or expects detailed answers that may be heard aloud later, include a brief spoken summary at the end of your response.
+
+Format:
+
+```md
+## Resumen hablado
+<1-3 sentences that capture the key points in plain, spoken-friendly language>
+```
+
+This block is optional and only appears when the answer is long enough that a spoken summary would be useful. Keep it concise, natural, and suitable for audio playback.

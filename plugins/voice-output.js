@@ -5,10 +5,11 @@ import { spawn } from "node:child_process"
 
 const DEFAULT_CONFIG_PATH = "plugins/voice-output.config.json"
 const DEFAULT_DISABLED_CONFIG = {
+  mode: "off",
   enabled: false,
   provider: "mock",
   playback: {
-    mode: "none",
+    mode: "command",
     command: ["afplay", "$AUDIO_PATH"],
   },
   profilePath: null,
@@ -16,6 +17,7 @@ const DEFAULT_DISABLED_CONFIG = {
     minLength: 12,
     maxLength: 4000,
     skipCodeBlocks: true,
+    spokenSummaryMarker: "## Resumen hablado",
     blockedMarkers: [
       "## Shared Contract",
       "## Coordination Message",
@@ -26,8 +28,8 @@ const DEFAULT_DISABLED_CONFIG = {
   },
   voxcpmBridge: {
     mode: "cli",
-    command: ["python3", "./plugins/voxcpm_bridge.py"],
-    timeoutMs: 30000,
+    command: ["/Users/arian/Documents/Dev/github_projects/VoxCPM/.venv/bin/python", "./plugins/voxcpm_bridge.py"],
+    timeoutMs: 300000,
   },
 }
 
@@ -118,6 +120,32 @@ function isEligibleText(text, filters) {
   }
 
   return { ok: true, text: value }
+}
+
+function extractSpokenSummary(text, marker) {
+  if (!marker || !text) return null
+
+  const markerPattern = new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i')
+  const match = text.match(markerPattern)
+  
+  if (!match) return null
+
+  const start = match.index
+  const afterMarker = text.slice(start + match[0].length).trim()
+  
+  const nextHeaders = afterMarker.match(/^#{1,6}\s+/m)
+  let end
+  if (nextHeaders) {
+    end = start + match[0].length + nextHeaders.index
+  } else {
+    end = text.length
+  }
+  
+  const summaryText = text.slice(start, end).replace(markerPattern, '').trim()
+  
+  if (summaryText.length < 8 || summaryText.length > 1200) return null
+  
+  return summaryText
 }
 
 async function loadProfile(directory, config) {
@@ -300,8 +328,10 @@ export const VoiceOutputPlugin = async ({ client, directory }) => {
       const generation = ++activeGeneration
       const { config, configPath, source } = await loadConfig(directory)
 
-      if (!config.enabled) {
-        await log(client, "debug", "Voice output skipped because feature is disabled", { configPath, source })
+      const mode = config.mode || "off"
+      
+      if (mode === "off") {
+        await log(client, "debug", "Voice output skipped because mode is 'off'", { configPath, source })
         return
       }
 
@@ -317,7 +347,22 @@ export const VoiceOutputPlugin = async ({ client, directory }) => {
         return
       }
 
-      const result = await synthesize(eligibility.text, profile.profile, config)
+      let spokenText = eligibility.text
+      
+      if (mode === "summary") {
+        const marker = config.filters?.spokenSummaryMarker || "## Resumen hablado"
+        const summary = extractSpokenSummary(output.text, marker)
+        if (summary) {
+          spokenText = summary
+          await log(client, "info", "Using spoken summary block for audio", { summaryLength: summary.length })
+        } else {
+          await log(client, "info", "No spoken summary found in response, falling back to full text", { marker })
+        }
+      } else if (mode === "full") {
+        spokenText = eligibility.text
+      }
+
+      const result = await synthesize(spokenText, profile.profile, config)
       if (generation !== activeGeneration) {
         await log(client, "info", "Voice output dropped because a newer response replaced it", { sessionID: input.sessionID })
         return

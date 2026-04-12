@@ -1,15 +1,17 @@
 {
-  "enabled": false,
-  "provider": "mock",
+  "mode": "summary",
+  "enabled": true,
+  "provider": "voxcpm-bridge",
   "playback": {
-    "mode": "none",
+    "mode": "command",
     "command": ["afplay", "$AUDIO_PATH"]
   },
-  "profilePath": "./plugins/voice-output.profile.example.json",
+  "profilePath": "./plugins/voice-output.profile.fer-miralles.json",
   "filters": {
     "minLength": 12,
     "maxLength": 4000,
     "skipCodeBlocks": true,
+    "spokenSummaryMarker": "## Resumen hablado",
     "blockedMarkers": [
       "## Shared Contract",
       "## Coordination Message",
@@ -20,7 +22,8 @@
   },
   "voxcpmBridge": {
     "mode": "cli",
-    "command": ["python3", "./plugins/voxcpm_bridge.py"],
-    "timeoutMs": 30000
+    "command": ["/Users/arian/Documents/Dev/github_projects/VoxCPM/.venv/bin/python", "./plugins/voxcpm_bridge.py"],
+    "timeoutMs": 300000
   }
+}
 }
