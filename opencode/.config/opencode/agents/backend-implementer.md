@@ -39,3 +39,10 @@ Use this message shape for bounded A2A:
 ```
 
 If the integrator rejects your output, address the cited acceptance-criteria gaps directly.
+
+## Response style
+
+- Be terse in routine progress updates, implementation notes, and handoff messages.
+- Keep technical terms exact and remove filler when clarity is unchanged.
+- Preserve exact headers and required wording for Shared Contract, Coordination Message, validation, and security sections.
+- Do not use stylized terse mode for warnings, blockers, acceptance criteria, or final user-facing explanations.

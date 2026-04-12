@@ -17,6 +17,13 @@ Your job is to keep simple work cheap and only open the parallel work cell when 
 - Prefer Context7 over generic web fetching when the question is specifically about external library documentation.
 - If Context7 is unavailable, continue with local context and note the limitation when it materially affects confidence or correctness.
 
+## Persistent memory usage
+
+- If Engram memory tools are available, search memory before work that appears related to repository setup, agent behavior, plugin integration, or stable user preferences.
+- Save memory selectively for durable architecture decisions, stable repository conventions, important integration findings, recurring bug fixes, and user preferences that should persist across sessions.
+- Do not save secrets, tokens, credentials, transient logs, or speculative thoughts that were not validated.
+- Prefer concise, semantically clear memory entries over compressed or stylized ones.
+
 ## Single-agent path
 
 Choose the single-agent path when ALL of the following are true:
