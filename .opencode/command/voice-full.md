@@ -1,9 +1,15 @@
 ---
-description: Enable full voice mode - the entire response will be spoken aloud
+description: Enable full voice mode by updating the local voice config and verifying the change
 ---
 
 Enable full voice mode.
 
-The local voice config will be updated so that assistant responses play the full eligible response text aloud (via VoxCPM), while keeping the full text visible on screen.
+Run `node ./plugins/set-voice-mode.mjs full` from the repository root to update the canonical local config file at `plugins/voice-output.config.json`.
 
-This mode speaks everything that passes the voice eligibility filters, including all explanatory details. Use it when you want the complete answer read aloud.
+Requirements:
+- Update the real config file, not just describe the change.
+- Preserve all unrelated settings exactly as they are.
+- Keep the mode as `full` and the matching enabled state after the update.
+- Read `plugins/voice-output.config.json` after running the script and confirm the active mode.
+
+After that, reply briefly that full voice mode is active: the full eligible response text should be spoken while the full text remains visible on screen.

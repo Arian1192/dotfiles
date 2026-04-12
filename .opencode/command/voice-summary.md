@@ -1,11 +1,15 @@
 ---
-description: Enable spoken summary mode - only the summary block will be spoken aloud
+description: Enable spoken summary mode by updating the local voice config and verifying the change
 ---
 
 Enable spoken summary mode.
 
-The local voice config will be updated so that assistant responses play only a brief spoken summary aloud (via VoxCPM), while keeping the full text visible on screen.
+Run `node ./plugins/set-voice-mode.mjs summary` from the repository root to update the canonical local config file at `plugins/voice-output.config.json`.
 
-When the response includes a "## Resumen hablado" block, only that summary is spoken. If no summary block exists, the full response is spoken.
+Requirements:
+- Update the real config file, not just describe the change.
+- Preserve all unrelated settings exactly as they are.
+- Keep the mode as `summary` and the matching enabled state after the update.
+- Read `plugins/voice-output.config.json` after running the script and confirm the active mode.
 
-This mode provides a concise audio version of your answer without reading the entire response aloud.
+After that, reply briefly that spoken summary mode is active: full text stays visible, and when a response contains `## Resumen hablado`, only that summary should be spoken; otherwise the full eligible response is spoken.

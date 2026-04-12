@@ -4,7 +4,10 @@
   "provider": "voxcpm-bridge",
   "playback": {
     "mode": "command",
-    "command": ["afplay", "$AUDIO_PATH"]
+    "command": [
+      "afplay",
+      "$AUDIO_PATH"
+    ]
   },
   "profilePath": "./plugins/voice-output.profile.fer-miralles.json",
   "filters": {
@@ -22,8 +25,10 @@
   },
   "voxcpmBridge": {
     "mode": "cli",
-    "command": ["/Users/arian/Documents/Dev/github_projects/VoxCPM/.venv/bin/python", "./plugins/voxcpm_bridge.py"],
+    "command": [
+      "/Users/arian/Documents/Dev/github_projects/VoxCPM/.venv/bin/python",
+      "./plugins/voxcpm_bridge.py"
+    ],
     "timeoutMs": 300000
   }
-}
 }

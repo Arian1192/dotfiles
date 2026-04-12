@@ -1,9 +1,15 @@
 ---
-description: Disable voice output - no audio will be played
+description: Disable voice output by updating the local voice config and verifying the change
 ---
 
 Disable voice output mode.
 
-The local voice config will be updated so that no spoken audio is played. Text responses continue normally without any audio playback.
+Run `node ./plugins/set-voice-mode.mjs off` from the repository root to update the canonical local config file at `plugins/voice-output.config.json`.
 
-After this command, future assistant responses will show full text but will not trigger any voice synthesis or playback.
+Requirements:
+- Update the real config file, not just describe the change.
+- Preserve all unrelated settings exactly as they are.
+- Keep the mode as `off` and the matching enabled state after the update.
+- Read `plugins/voice-output.config.json` after running the script and confirm the active mode.
+
+After that, reply briefly that voice output is disabled and future responses should remain text-only with no synthesis or playback.
