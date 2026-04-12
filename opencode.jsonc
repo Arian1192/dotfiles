@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "username": "arian",
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "headers": {
+        "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
+      }
+    }
+  },
+  "agent": {
+    // Keep only user-facing primary agents here.
+    // Specialist workers live in ~/.config/opencode/agents/ so the UI stays focused.
+    "dispatcher": {
+      "description": "Routes work onto the cheap single-agent path or the contract-first parallel work cell.",
+      "mode": "primary",
+      "color": "accent",
+      "steps": 12,
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "webfetch": "allow",
+        "task": {
+          "*": "deny",
+          "contract-planner": "allow",
+          "backend-implementer": "allow",
+          "frontend-implementer": "allow",
+          "security-advisor": "allow",
+          "integrator": "allow",
+          "reviewer": "allow"
+        }
+      },
+      "prompt": "{file:./prompts/dispatcher.md}"
+    }
+  },
+  "mode": {},
+  "plugin": [
+    "opentmux"
+  ],
+  "command": {}
+}

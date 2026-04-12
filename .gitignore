@@ -1,0 +1,10 @@
+node_modules/
+.opencode/node_modules/
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# macOS
+.DS_Store
