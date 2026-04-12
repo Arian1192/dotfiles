@@ -1,6 +1,6 @@
 # OpenCode workspace
 
-This directory contains my local `~/.config/opencode` setup, stored in `dotfiles` so it can be installed via GNU Stow.
+This directory contains my local `~/.config/opencode` setup, stored in `dotfiles` as its own Stow package.
 
 ## What Stow does
 
@@ -8,13 +8,13 @@ GNU Stow creates symbolic links from this repository into `$HOME`.
 
 Example:
 
-- repo path: `.config/opencode/opencode.jsonc`
+- repo path: `opencode/.config/opencode/opencode.jsonc`
 - linked path: `~/.config/opencode/opencode.jsonc`
 
 From the root of the dotfiles repo:
 
 ```bash
-stow .
+stow opencode
 ```
 
 ## Structure
@@ -55,7 +55,7 @@ For now the layout is intentionally conservative: documented and grouped, but no
 
 ```bash
 cd ~/.dotfiles
-stow .
+stow opencode
 cd ~/.config/opencode
 cp .env.example .env
 ```

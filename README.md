@@ -1,85 +1,75 @@
-# My Custom Dotfiles Configuration
+# Dotfiles
 
-Welcome to my personal dotfiles configuration repository! This repository contains all the necessary configurations to set up my development environment.
+My personal dotfiles repository, organized as **GNU Stow packages** so each area can be installed independently.
 
-![Dotfiles](https://img.shields.io/badge/dotfiles-managed-brightgreen?style=flat-square)
+## Current layout
 
-## Table of Contents
+- `zsh/`
+  - installs `~/.zshrc`
+- `ghostty/`
+  - installs `~/.config/ghostty/`
+- `opencode/`
+  - installs `~/.config/opencode/`
+- `cursor/`
+  - installs `~/Library/Application Support/Cursor/`
 
-- [Installation](#installation)
-- [Features](#features)
-- [Usage](#usage)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
+This package-based layout is more predictable than stowing the whole repo as a single unit.
 
-## Installation
+## Requirements
 
-### Prerequisites
+On macOS:
 
-Make sure you have Git and Stow installed on your macOS system. You can install them using Homebrew:
+```bash
+brew install git stow
+```
 
-1. **Install Homebrew (if not already installed):**
+## Clone
 
-    ```sh
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
+```bash
+git clone https://github.com/Arian1192/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+```
 
-2. **Install Git:**
+## Install with Stow
 
-    ```sh
-    brew install git
-    ```
+Install everything tracked here:
 
-3. **Install Stow:**
+```bash
+stow zsh ghostty opencode cursor
+```
 
-    ```sh
-    brew install stow
-    ```
+Or install only one package:
 
-### Clone and Install Dotfiles
+```bash
+stow opencode
+stow ghostty
+stow zsh
+```
 
-1. **Clone the repository:**
+If you ever want to remove a package's symlinks:
 
-    ```sh
-    git clone https://github.com/Arian1192/dotfiles.git ~/.dotfiles
-    ```
+```bash
+stow -D opencode
+```
 
-2. **Run Stow . to create symlinks:**
+## Notes
 
-    ```sh
-    cd ~/.dotfiles
-    stow .
-    ```
+- Documentation files like `README.md` are ignored by Stow and stay only in the repo.
+- Secrets such as `.env` are intentionally not committed.
+- The `opencode/` package contains its own README with setup notes and structure details.
 
-3. **Restart your terminal:**
+## Practical examples
 
-    ```sh
-    exec $SHELL
-    ```
+Install shell and terminal config only:
 
-## Features
+```bash
+stow zsh ghostty
+```
 
-- **Custom Shell Prompt**: A sleek and informative prompt.
-- **Alias Shortcuts**: Commonly used commands are shortened.
-- **Vim Configuration**: Enhanced settings for Vim.
-- **Git Configuration**: Custom Git aliases and settings.
+Install just the OpenCode workspace:
 
-## Usage
-
-Once installed, you can start using the custom configurations immediately. Here are some example commands:
-
-- Open Vim with custom settings: `vim`
-- Use Git aliases: `gst` for `git status`, `gco` for `git checkout`
-
-## Customization
-
-Feel free to customize the configurations to suit your needs. Simply edit the corresponding files in the `.dotfiles` directory.
-
-## Contributing
-
-If you have any suggestions or improvements, feel free to open an issue or submit a pull request. Contributions are welcome!
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```bash
+stow opencode
+cd ~/.config/opencode
+cp .env.example .env
+```

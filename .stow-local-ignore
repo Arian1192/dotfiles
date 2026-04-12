@@ -1,2 +1,4 @@
-.git
-scripts
+^\.git$
+^scripts$
+README\.md$
+\.DS_Store$
