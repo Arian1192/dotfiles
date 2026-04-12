@@ -9,6 +9,15 @@
       "headers": {
         "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}"
       }
+    },
+    "engram": {
+      "type": "local",
+      "command": [
+        "engram",
+        "mcp",
+        "--tools=agent"
+      ],
+      "enabled": true
     }
   },
   "agent": {
