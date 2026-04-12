@@ -15,6 +15,7 @@ This is a local experimental plugin for post-response voice playback.
 - `plugins/voice-output.js` — plugin implementation
 - `plugins/voice-output.config.json` — local plugin config
 - `plugins/voice-output.profile.example.json` — example cloned-voice profile
+- `plugins/voxcpm_bridge.py` — real local VoxCPM bridge contract
 - `plugins/voxcpm_bridge_stub.py` — local stub bridge using macOS `say`
 
 ## Config
@@ -50,14 +51,41 @@ OPENCODE_VOICE_OUTPUT_CONFIG=/absolute/path/to/config.json opencode
 The included `voxcpm_bridge_stub.py` is a bridge-contract test double, not real VoxCPM.
 It uses macOS `say` to generate an `.aiff` file so the playback path can be validated end-to-end.
 
-## Real VoxCPM path later
+### voxcpm-bridge real path
 
-Replace the stub bridge with a real local VoxCPM bridge that:
+- calls `plugins/voxcpm_bridge.py`
+- expects the Python `voxcpm` package to be available
+- loads a model from the configured voice profile
+- supports:
+  - plain TTS
+  - reference-audio cloning
+  - optional prompt-audio + prompt-text guidance
+- writes a temporary `.wav` file and returns its path as JSON
 
-1. receives assistant response text plus profile metadata
-2. loads local reference audio / optional prompt transcript
-3. synthesizes audio with VoxCPM
-4. returns `audioPath` to the plugin
+If `voxcpm` is not installed or model loading fails, the bridge exits non-zero and the plugin preserves the text response.
+
+## Real VoxCPM setup
+
+Minimal local setup idea:
+
+```bash
+python3 -m venv .venv-voxcpm
+source .venv-voxcpm/bin/activate
+pip install voxcpm
+```
+
+Then point the bridge command to that environment if needed, for example:
+
+```json
+{
+  "voxcpmBridge": {
+    "command": ["/absolute/path/to/.venv-voxcpm/bin/python", "./plugins/voxcpm_bridge.py"],
+    "timeoutMs": 30000
+  }
+}
+```
+
+The first real run may download the configured model.
 
 ## Why config is separate from opencode.jsonc
 

@@ -1,9 +1,15 @@
 {
   "provider": "voxcpm-bridge",
+  "model": "openbmb/VoxCPM2",
   "referenceAudioPath": "~/voice/reference.wav",
   "promptAudioPath": null,
   "promptText": null,
   "style": "warm, calm, conversational",
   "language": "es",
+  "cfgValue": 2.0,
+  "inferenceTimesteps": 10,
+  "loadDenoiser": false,
+  "normalize": false,
+  "denoise": false,
   "macOSVoice": "Monica"
 }

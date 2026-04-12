@@ -1,11 +1,11 @@
 {
-  "enabled": false,
-  "provider": "mock",
+  "enabled": true,
+  "provider": "voxcpm-bridge",
   "playback": {
     "mode": "none",
     "command": ["afplay", "$AUDIO_PATH"]
   },
-  "profilePath": "./plugins/voice-output.profile.example.json",
+  "profilePath": null,
   "filters": {
     "minLength": 12,
     "maxLength": 4000,

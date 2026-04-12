@@ -26,7 +26,7 @@ const DEFAULT_DISABLED_CONFIG = {
   },
   voxcpmBridge: {
     mode: "cli",
-    command: ["python3", "./plugins/voxcpm_bridge_stub.py"],
+    command: ["python3", "./plugins/voxcpm_bridge.py"],
     timeoutMs: 30000,
   },
 }
