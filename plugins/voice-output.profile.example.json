@@ -1,0 +1,9 @@
+{
+  "provider": "voxcpm-bridge",
+  "referenceAudioPath": "~/voice/reference.wav",
+  "promptAudioPath": null,
+  "promptText": null,
+  "style": "warm, calm, conversational",
+  "language": "es",
+  "macOSVoice": "Monica"
+}

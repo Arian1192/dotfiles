@@ -1,0 +1,26 @@
+{
+  "enabled": false,
+  "provider": "mock",
+  "playback": {
+    "mode": "none",
+    "command": ["afplay", "$AUDIO_PATH"]
+  },
+  "profilePath": "./plugins/voice-output.profile.example.json",
+  "filters": {
+    "minLength": 12,
+    "maxLength": 4000,
+    "skipCodeBlocks": true,
+    "blockedMarkers": [
+      "## Shared Contract",
+      "## Coordination Message",
+      "## Coordination Trace",
+      "validation-failure",
+      "tool_use"
+    ]
+  },
+  "voxcpmBridge": {
+    "mode": "cli",
+    "command": ["python3", "./plugins/voxcpm_bridge_stub.py"],
+    "timeoutMs": 30000
+  }
+}
