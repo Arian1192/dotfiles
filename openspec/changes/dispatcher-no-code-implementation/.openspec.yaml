@@ -1,0 +1,11 @@
+schema: spec-driven
+context: |
+  Tech stack: Any (focus on process)
+  We use conventional commits
+  Domain: Agent architecture – Dispatcher must not implement code
+rules:
+  proposal:
+    - Keep proposals under 500 words
+    - Always include a "Non-goals" section
+  tasks:
+    - Break tasks into chunks of max 2 hours
