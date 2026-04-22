@@ -7,6 +7,7 @@ This OpenCode setup uses a contract-first hybrid agent architecture.
 The short version is:
 
 - simple tasks stay on a cheap single-agent path
+- the dispatcher remains coordination-only and never authors implementation changes
 - multi-surface tasks can fan out to specialist subagents
 - subagents can coordinate through bounded A2A messages
 - an integrator checks convergence against a shared contract and acceptance criteria
@@ -38,7 +39,7 @@ The reason is simple:
 
 The system is organized around these roles:
 
-- `dispatcher`: primary routing authority
+- `dispatcher`: primary routing authority and coordination-only entry point
 - `contract-planner`: defines the shared contract before parallel work begins
 - `backend-implementer`: owns backend implementation work
 - `frontend-implementer`: owns frontend implementation work
@@ -51,14 +52,14 @@ The system is organized around these roles:
 ```text
 User request
   -> Dispatcher
-  -> Contract Planner
   -> Execution decision
-     -> Single-agent path
+     -> Single-agent path (routing/coordination only; no Dispatcher-authored implementation)
      -> Parallel work cell
-          -> Backend Implementer
-          -> Frontend Implementer
-          -> Security Advisor (when needed)
-          <-> bounded A2A over shared contract
+          -> Contract Planner
+           -> Backend Implementer
+           -> Frontend Implementer
+           -> Security Advisor (when needed)
+           <-> bounded A2A over shared contract
   -> Integrator
   -> Validation
   -> Security Gate
@@ -187,6 +188,8 @@ The current layout is intentionally split like this:
 
 This map is the fastest way to understand where behavior lives.
 
+The Dispatcher is intentionally not an implementation agent. Its responsibility is to classify work, decide whether a work cell is needed, and coordinate the right specialists or validation path. If implementation is required, that work belongs to the appropriate specialist, not to the Dispatcher.
+
 ## Context7 integration
 
 This workspace uses a shared `context7` MCP server in `~/.config/opencode/opencode.jsonc` so agents and subagents can retrieve current third-party library and framework documentation when they actually need it.
@@ -276,6 +279,19 @@ To keep rework and acceptance decisions explainable, the system should preserve 
 
 That record is the minimum useful audit trail for understanding why a change moved forward, got blocked, or was sent back.
 
+For operator-visible proof that the Dispatcher stayed on the coordination side of the boundary, routed execution should also emit a routing marker like this:
+
+```md
+## Dispatcher Routing Record
+- Path: single-agent | parallel-work-cell
+- Dispatcher Role: coordination-only
+- Implementation Owner: <agent-name | none>
+- Contract Version: <version | n/a>
+- Reason:
+```
+
+This is the fastest visual check that the Dispatcher selected a path and handed implementation to the correct owner instead of doing the implementation itself.
+
 For security-sensitive changes, the gate can be summarized like this:
 
 ```md
@@ -301,9 +317,9 @@ That means collaboration is real, but the graph stays constrained.
 
 Examples that should stay on the cheap single-agent path:
 
-- edit one backend validation rule
-- rename one frontend component prop within a local surface
-- update a small doc or prompt with no cross-domain effect
+- route one backend validation change to the backend owner without opening a work cell
+- route one frontend component prop change within a local surface without opening a work cell
+- handle a small documentation or prompt clarification that does not require specialist implementation
 
 Examples that should enter the parallel work cell:
 
@@ -356,7 +372,7 @@ This architecture is a bad fit for:
 
 Use the simple path by default.
 
-Only open the parallel work cell when the task has clear specialist boundaries and a shared contract that makes parallelism worth the cost.
+Only open the parallel work cell when the task has clear specialist boundaries and a shared contract that makes parallelism worth the cost. In all cases, keep the Dispatcher on the routing/coordination side of the boundary rather than letting it implement product changes.
 
 In one sentence:
 
